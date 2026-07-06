@@ -109,7 +109,7 @@ const cartas = [
         personaje: "Mariano",
         categoria: "Aqui no hay quien viva",
         frase: "Si ya lo decían los romanos: Carpe Diem, Tíratela, tíratela",
-        imagen: "img/mariano.jpeg",
+        imagen: "img/mariano.jpg",
         rareza: 3,
         sonido: null
     },
@@ -120,6 +120,15 @@ const cartas = [
         frase: "Central, aquí el detective León. Se confirma presencia de chochetes en la zona",
         imagen: "img/amador_cambio.jpeg",
         rareza: 3,
+        sonido: null
+    },
+    {
+        id: 14,
+        personaje: "Salamanca",
+        categoria: "Exótico",
+        frase: "¿Tu no serás de Salamanca?",
+        imagen: "img/salamanca.png",
+        rareza: 4,
         sonido: null
     }
 ];
