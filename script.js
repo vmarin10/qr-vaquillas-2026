@@ -239,19 +239,26 @@ function formatearFecha(fechaISO) {
 
 // Inicialización cuando el DOM está listo
 document.addEventListener('DOMContentLoaded', () => {
-    // Verificar que hay datos disponibles
-    if (!window.cartas || window.cartas.length === 0) {
-        console.error('No se encontraron datos de cartas');
-        document.getElementById('cardContainer').innerHTML = 
-            '<div class="error">Error: No se encontraron las cartas. Verifica que data.js se cargue correctamente.</div>';
-        return;
-    }
+    // Esperar un poco y verificar que hay datos disponibles
+    setTimeout(() => {
+        console.log('Verificando datos de cartas...');
+        console.log('window.cartas:', window.cartas);
+        console.log('typeof cartas:', typeof window.cartas);
+        console.log('cartas.length:', window.cartas ? window.cartas.length : 'undefined');
+        
+        if (!window.cartas || window.cartas.length === 0) {
+            console.error('No se encontraron datos de cartas');
+            document.getElementById('cardContainer').innerHTML = 
+                '<div class="error">Error: No se encontraron las cartas. Verifica que data.js se cargue correctamente.</div>';
+            return;
+        }
 
-    // Inicializar la aplicación
-    window.qrVaquillas = new QRVaquillas();
-    
-    console.log('QR Vaquillas 2026 iniciado correctamente');
-    console.log(`Cartas disponibles: ${window.cartas.length}`);
+        // Inicializar la aplicación
+        window.qrVaquillas = new QRVaquillas();
+        
+        console.log('QR Vaquillas 2026 iniciado correctamente');
+        console.log(`Cartas disponibles: ${window.cartas.length}`);
+    }, 100);
 });
 
 // Manejo de errores globales
