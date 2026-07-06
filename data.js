@@ -10,7 +10,7 @@ const cartas = [
         personaje: "Amador",
         categoria: "LQSA",
         frase: "Hacia Maite va un salami, rin, rin,Yo se la arrimaba, yo se la arrimé,Yo me pinchaba, yo me la pinché...¡A restregar cebolleta!",
-        imagen: "img/amador_carta_maite.png",
+        imagen: "img/amador_salami.png",
         rareza: 4,
         sonido: null
     },
@@ -28,7 +28,7 @@ const cartas = [
         personaje: "Amador",
         categoria: "LQSA",
         frase: "El Amor es como un rio que moja y salpica y desembucha en el mar. Navegamos a la deriva y nuestros sentimientos flota entre la sal y las medusas marinas del mar... Oh el mar... Hogar del Calamar.",
-        imagen: "img/amador_carta_maite.png",
+        imagen: "img/amador_calamar.png",
         rareza: 4,
         sonido: null
     },
@@ -37,7 +37,7 @@ const cartas = [
         personaje: "Amador",
         categoria: "LQSA",
         frase: "¡Oh Maite! oh... tus tetas son como perlas... ¡déjame verlas!",
-        imagen: "img/amador_carta_maite.png",
+        imagen: "img/amador_maite.png",
         rareza: 2,
         sonido: null
     },
@@ -54,7 +54,7 @@ const cartas = [
         id: 6,
         personaje: "XXL",
         categoria: "Torre Infernal",
-        frase: "Gordas NO!",
+        frase: "¡Gordas NO!",
         imagen: "img/gordas_no.png",
         rareza: 1,
         sonido: null
@@ -66,6 +66,42 @@ const cartas = [
         frase: "Te salio la foto del AJO, pues ahora me comes el de ABAJO",
         imagen: "img/ajo.png",
         rareza: 5,
+        sonido: null
+    },  
+    {
+        id: 8,
+        personaje: "Bladi",
+        categoria: "AJO",
+        frase: "Si encuentras a este narco colombiano, TE INVITA a un cubata",
+        imagen: "img/bladi_fumador.jpeg",
+        rareza: 2,
+        sonido: null
+    },  
+    {
+        id: 9,
+        personaje: "Charo",
+        categoria: "Exótica",
+        frase: "Si eres pro-palestina, me comes toda la sardina",
+        imagen: "img/charo.png",
+        rareza: 2,
+        sonido: null
+    },
+    {
+        id: 10,
+        personaje: "Florin",
+        categoria: "AJO",
+        frase: "Te toco el Florin mariquita, si le enseñas las tetas se le pone pita",
+        imagen: "img/florin_mariquita.jpeg",
+        rareza: 2,
+        sonido: null
+    },
+    {
+        id: 11,
+        personaje: "Saturno",
+        categoria: "AJO",
+        frase: "TE TOCO EL SATURNO SALVAJE, SI LO VES.. TE PEGARA UN BUEN VIAJE",
+        imagen: "img/saturno.jpeg",
+        rareza: 3,
         sonido: null
     }
 ];
@@ -89,7 +125,8 @@ const categorias = [
     "LQSA",
     "Aqui no hay quien viva", 
     "Torre Infernal",
-    "AJO"
+    "AJO",
+    "Exótica"
 ];
 
 // Exportar para uso en script.js
