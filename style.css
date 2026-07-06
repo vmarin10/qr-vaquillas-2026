@@ -181,6 +181,22 @@ body::before {
     position: relative;
 }
 
+/* Ajuste para frases largas */
+.card-frase.larga {
+    font-size: 1.3rem;
+    line-height: 1.1;
+    padding: 0 5px;
+}
+
+/* Para frases muy largas */
+.card-frase.muy-larga {
+    font-size: 1.1rem;
+    line-height: 1.0;
+    padding: 0 8px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+}
+
 .card-frase::after {
     content: '';
     position: absolute;

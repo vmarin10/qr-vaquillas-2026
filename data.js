@@ -23,8 +23,35 @@ const cartas = [
         rareza: 3,
         sonido: null
     },
-        {
+    {
         id: 3,
+        personaje: "Amador",
+        categoria: "LQSA",
+        frase: "El Amor es como un rio que moja y salpica y desembucha en el mar. Navegamos a la deriva y nuestros sentimientos flota entre la sal y las medusas marinas del mar... Oh el mar... Hogar del Calamar.",
+        imagen: "img/amador_carta_maite.png",
+        rareza: 4,
+        sonido: null
+    },
+    {
+        id: 4,
+        personaje: "Amador",
+        categoria: "LQSA",
+        frase: "¡Oh Maite! oh... tus tetas son como perlas... ¡déjame verlas!",
+        imagen: "img/amador_carta_maite.png",
+        rareza: 2,
+        sonido: null
+    },
+    {
+        id: 5,
+        personaje: "Amador",
+        categoria: "LQSA",
+        frase: "— ¡No hombre! Tiene que ser algo más romántico, algo tipo: \"Oh Maite, tu dulzura...\" — ...¡me la pone dura!",
+        imagen: "img/amador_carta_maite.png",
+        rareza: 3,
+        sonido: null
+    },
+    {
+        id: 6,
         personaje: "XXL",
         categoria: "Torre Infernal",
         frase: "Gordas NO!",
