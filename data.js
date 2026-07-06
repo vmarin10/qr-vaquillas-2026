@@ -112,6 +112,15 @@ const cartas = [
         imagen: "img/mariano.jpeg",
         rareza: 3,
         sonido: null
+    },
+    {
+        id: 13,
+        personaje: "Amador",
+        categoria: "LQSA",
+        frase: "Central, aquí el detective León. Se confirma presencia de chochetes en la zona",
+        imagen: "img/amador_cambio.jpeg",
+        rareza: 3,
+        sonido: null
     }
 ];
 
