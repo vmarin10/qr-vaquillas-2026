@@ -103,6 +103,15 @@ const cartas = [
         imagen: "img/saturno.jpeg",
         rareza: 3,
         sonido: null
+    },
+    {
+        id: 12,
+        personaje: "Mariano",
+        categoria: "Aqui no hay quien viva",
+        frase: "Si ya lo decían los romanos: Carpe Diem, Tíratela, tíratela",
+        imagen: "img/mariano.jpeg",
+        rareza: 3,
+        sonido: null
     }
 ];
 
