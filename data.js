@@ -1,6 +1,9 @@
 // Base de datos de cartas para QR Vaquillas 2026 - v2.0
 // Cada carta contiene: id, personaje, categoria, frase, imagen, rareza, sonido
 
+console.log('data.js cargado correctamente');
+console.log('Definiendo cartas...');
+
 const cartas = [
     {
         id: 1,
@@ -21,6 +24,11 @@ const cartas = [
         sonido: null
     }
 ];
+
+console.log('Cartas definidas:', cartas.length);
+console.log('Asignando cartas a window...');
+window.cartas = cartas;
+console.log('window.cartas asignado:', window.cartas);
 
 // Configuración de rareza (1-5 estrellas)
 const configuracionRareza = {
