@@ -171,6 +171,9 @@ qrVaquillas.resetearProgreso();
 Este proyecto es para uso personal de la peña. 
 Siéntete libre de modificarlo y adaptarlo.
 
+## 🚀 Despliegue
+Activo en GitHub Pages - Julio 2026
+
 ## 🤝 Contribuciones
 
 Las contribuciones son bienvenidas:
