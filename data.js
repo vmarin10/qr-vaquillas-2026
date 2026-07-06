@@ -9,15 +9,15 @@ const cartas = [
         id: 1,
         personaje: "Amador",
         categoria: "LQSA",
-        frase: "Merengue, merengue.",
+        frase: "Hacia Maite va un salami, rin, rin,Yo se la arrimaba, yo se la arrimé,Yo me pinchaba, yo me la pinché...¡A restregar cebolleta!",
         imagen: "img/amador_carta_maite.png",
         rareza: 4,
         sonido: null
     },
     {
         id: 2,
-        personaje: "Tío Paco",
-        categoria: "Clásico",
+        personaje: "Mariano",
+        categoria: "Aqui no hay quien viva",
         frase: "Querida cachorrita, te voy a meter todo menos miedo",
         imagen: "img/cachorrita_miedo.png",
         rareza: 3,
