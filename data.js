@@ -22,6 +22,15 @@ const cartas = [
         imagen: "img/cachorrita_miedo.png",
         rareza: 3,
         sonido: null
+    },
+        {
+        id: 3,
+        personaje: "XXL",
+        categoria: "Torre Infernal",
+        frase: "Gordas NO!",
+        imagen: "img/gordas_no.png",
+        rareza: 1,
+        sonido: null
     }
 ];
 
@@ -30,20 +39,20 @@ console.log('Asignando cartas a window...');
 window.cartas = cartas;
 console.log('window.cartas asignado:', window.cartas);
 
-// Configuración de rareza (1-5 estrellas)
+// Configuración de tipo de frase (1-5 niveles)
 const configuracionRareza = {
-    1: "Común",
-    2: "Poco común", 
-    3: "Rara",
-    4: "Épica",
+    1: "Cachonda",
+    2: "Atrevida", 
+    3: "Graciosa",
+    4: "Juguetona",
     5: "Legendaria"
 };
 
 // Categorías disponibles
 const categorias = [
     "LQSA",
-    "Clásico", 
-    "Fiestas"
+    "Aqui no hay quien viva", 
+    "Torre Infernal"
 ];
 
 // Exportar para uso en script.js
