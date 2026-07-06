@@ -1,4 +1,4 @@
-// Base de datos de cartas para QR Vaquillas 2026
+// Base de datos de cartas para QR Vaquillas 2026 - v2.0
 // Cada carta contiene: id, personaje, categoria, frase, imagen, rareza, sonido
 
 const cartas = [
