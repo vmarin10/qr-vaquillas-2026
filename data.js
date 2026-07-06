@@ -58,6 +58,15 @@ const cartas = [
         imagen: "img/gordas_no.png",
         rareza: 1,
         sonido: null
+    },
+    {
+        id: 7,
+        personaje: "Ajo",
+        categoria: "AJO",
+        frase: "Te salio la foto del AJO, pues ahora me comes el de ABAJO",
+        imagen: "img/ajo.png",
+        rareza: 5,
+        sonido: null
     }
 ];
 
@@ -79,7 +88,8 @@ const configuracionRareza = {
 const categorias = [
     "LQSA",
     "Aqui no hay quien viva", 
-    "Torre Infernal"
+    "Torre Infernal",
+    "AJO"
 ];
 
 // Exportar para uso en script.js
