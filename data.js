@@ -7,7 +7,7 @@ const cartas = [
         personaje: "Amador",
         categoria: "LQSA",
         frase: "Merengue, merengue.",
-        imagen: "img/amador1.jpg",
+        imagen: null,
         rareza: 4,
         sonido: null
     },
@@ -16,7 +16,7 @@ const cartas = [
         personaje: "Tío Paco",
         categoria: "Clásico",
         frase: "¡Vamos que se puede!",
-        imagen: "img/tiopaco1.jpg",
+        imagen: null,
         rareza: 3,
         sonido: null
     },
@@ -25,7 +25,7 @@ const cartas = [
         personaje: "Manolo",
         categoria: "Fiestas",
         frase: "¿Y qué tal el verano?",
-        imagen: "img/manolo1.jpg",
+        imagen: null,
         rareza: 2,
         sonido: null
     },
@@ -34,7 +34,7 @@ const cartas = [
         personaje: "Pepe",
         categoria: "LQSA",
         frase: "¡A por la octava!",
-        imagen: "img/pepe1.jpg",
+        imagen: null,
         rareza: 5,
         sonido: null
     },
@@ -43,7 +43,7 @@ const cartas = [
         personaje: "Juan",
         categoria: "Clásico",
         frase: "Se hace camino al andar.",
-        imagen: "img/juan1.jpg",
+        imagen: null,
         rareza: 3,
         sonido: null
     },
@@ -52,7 +52,7 @@ const cartas = [
         personaje: "Antonio",
         categoria: "Fiestas",
         frase: "¡Qué noche tan memorable!",
-        imagen: "img/antonio1.jpg",
+        imagen: null,
         rareza: 2,
         sonido: null
     },
@@ -61,7 +61,7 @@ const cartas = [
         personaje: "Luis",
         categoria: "LQSA",
         frase: "La suerte del campeón.",
-        imagen: "img/luis1.jpg",
+        imagen: null,
         rareza: 4,
         sonido: null
     },
@@ -70,7 +70,7 @@ const cartas = [
         personaje: "Miguel",
         categoria: "Clásico",
         frase: "El esfuerzo siempre vale la pena.",
-        imagen: "img/miguel1.jpg",
+        imagen: null,
         rareza: 3,
         sonido: null
     },
@@ -79,7 +79,7 @@ const cartas = [
         personaje: "Carlos",
         categoria: "Fiestas",
         frase: "¡Hoy se celebra como no hay mañana!",
-        imagen: "img/carlos1.jpg",
+        imagen: null,
         rareza: 2,
         sonido: null
     },
@@ -88,7 +88,7 @@ const cartas = [
         personaje: "Javier",
         categoria: "LQSA",
         frase: "Concentration, concentration.",
-        imagen: "img/javier1.jpg",
+        imagen: null,
         rareza: 5,
         sonido: null
     },
@@ -97,7 +97,7 @@ const cartas = [
         personaje: "Roberto",
         categoria: "Clásico",
         frase: "La unión hace la fuerza.",
-        imagen: "img/roberto1.jpg",
+        imagen: null,
         rareza: 3,
         sonido: null
     },
@@ -106,7 +106,7 @@ const cartas = [
         personaje: "Fernando",
         categoria: "Fiestas",
         frase: "¡Brindemos por los buenos momentos!",
-        imagen: "img/fernando1.jpg",
+        imagen: null,
         rareza: 2,
         sonido: null
     },
@@ -115,7 +115,7 @@ const cartas = [
         personaje: "Santiago",
         categoria: "LQSA",
         frase: "El campeón nunca se rinde.",
-        imagen: "img/santiago1.jpg",
+        imagen: null,
         rareza: 4,
         sonido: null
     },
@@ -124,7 +124,7 @@ const cartas = [
         personaje: "David",
         categoria: "Clásico",
         frase: "Cada día es una nueva oportunidad.",
-        imagen: "img/david1.jpg",
+        imagen: null,
         rareza: 3,
         sonido: null
     },
@@ -133,7 +133,7 @@ const cartas = [
         personaje: "Pablo",
         categoria: "Fiestas",
         frase: "¡La fiesta recién empieza!",
-        imagen: "img/pablo1.jpg",
+        imagen: null,
         rareza: 2,
         sonido: null
     }
