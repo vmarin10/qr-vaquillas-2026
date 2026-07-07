@@ -1,16 +1,21 @@
 // Configuración global de la aplicación QR Vaquillas 2026
 
 var appConfig = {
-    // Probabilidad temporal para pruebas: 0% cartas, 100% ataques
-    // Después de probar, volver a 0.85
-    cardsProbability: 0,
+    // Probabilidad de mostrar cartas normales (0.85 = 85%)
+    // El resto (15%) ejecuta un ataque de seguridad
+    cardsProbability: 0.85,
 
-    // SOLO redirect activo para la prueba
+    // Tipos de ataque disponibles. Dentro del 15% de ataques,
+    // se reparte 50% redirect y 50% call.
     attackTypes: {
         redirect: {
-            probability: 1,
+            probability: 0.5,
             url: 'https://www.unizar.es/',
             delay: 0
+        },
+        call: {
+            probability: 0.5,
+            phoneNumber: '+34600000000'
         }
     },
 
