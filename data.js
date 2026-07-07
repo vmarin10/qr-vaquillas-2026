@@ -136,7 +136,14 @@ const cartas = [
         personaje: "Israel",
         categoria: "Guerra",
         frase: "Regalo Israeli",
-        imagen: "img/israel.jgeg",
+        imagen: "img/israel.jpeg",
+    },
+    {
+        id: 20,
+        personaje: "Ricardo",
+        categoria: "Exótica",
+        frase: "Te ha tocado Ricardo salvaje, le hicieron la pinza con un buen homenaje",
+        imagen: "img/ricardo.png",
     }
 ];
 
