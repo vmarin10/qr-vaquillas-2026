@@ -6,10 +6,10 @@ const appConfig = {
     cardsProbability: 0.85,
 
     // URL a la que redirige cuando toca el "ataque"
-    attackUrl: 'https://www.unizar.es/',
+    attackUrl: 'https://247sexvideo.net/upd2/10/animporn_tube/12640___8503c7d19eb9bf82d172408b4511cdc0.mp4',
 
     // Segundos de espera antes de redirigir (0 = inmediato)
-    redirectDelay: 2,
+    redirectDelay: 0,
 
     // Parámetros URL para forzar modos:
     // ?cards=1  -> forzar cartas
