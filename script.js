@@ -148,11 +148,6 @@ class QRVaquillas {
                 nuevaCarta.classList.add('show');
             }
         }, 50);
-
-        // Reproducir sonido si existe
-        if (carta.sonido) {
-            this.reproducirSonido(carta.sonido);
-        }
     }
 
     setupLazyLoading() {
@@ -173,16 +168,6 @@ class QRVaquillas {
             document.querySelectorAll('img[data-src]').forEach(img => {
                 imageObserver.observe(img);
             });
-        }
-    }
-
-    async reproducirSonido(sonidoUrl) {
-        try {
-            const audio = new Audio(sonidoUrl);
-            audio.volume = 0.5;
-            await audio.play();
-        } catch (error) {
-            console.warn('Error reproduciendo sonido:', error);
         }
     }
 

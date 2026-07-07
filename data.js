@@ -1,5 +1,5 @@
 // Base de datos de cartas para QR Vaquillas 2026 - v2.0
-// Cada carta contiene: id, personaje, categoria, frase, imagen, sonido
+// Cada carta contiene: id, personaje, categoria, frase, imagen
 
 console.log('data.js cargado correctamente');
 console.log('Definiendo cartas...');
@@ -11,7 +11,6 @@ const cartas = [
         categoria: "LQSA",
         frase: "Hacia Maite va un salami, rin, rin,Yo se la arrimaba, yo se la arrimé,Yo me pinchaba, yo me la pinché...¡A restregar cebolleta!",
         imagen: "img/amador_salami.png",
-        sonido: null
     },
     {
         id: 2,
@@ -19,7 +18,6 @@ const cartas = [
         categoria: "Aqui no hay quien viva",
         frase: "Querida cachorrita, te voy a meter todo menos miedo",
         imagen: "img/cachorrita_miedo.png",
-        sonido: null
     },
     {
         id: 3,
@@ -27,7 +25,6 @@ const cartas = [
         categoria: "LQSA",
         frase: "El Amor es como un rio que moja y salpica y desembucha en el mar. Navegamos a la deriva y nuestros sentimientos flota entre la sal y las medusas marinas del mar... Oh el mar... Hogar del Calamar.",
         imagen: "img/amador_calamar.png",
-        sonido: null
     },
     {
         id: 4,
@@ -35,7 +32,6 @@ const cartas = [
         categoria: "LQSA",
         frase: "¡Oh Maite! oh... tus tetas son como perlas... ¡déjame verlas!",
         imagen: "img/amador_maite.png",
-        sonido: null
     },
     {
         id: 5,
@@ -43,15 +39,13 @@ const cartas = [
         categoria: "LQSA",
         frase: "— ¡No hombre! Tiene que ser algo más romántico, algo tipo: \"Oh Maite, tu dulzura...\" — ...¡me la pone dura!",
         imagen: "img/amador_carta_maite.png",
-        sonido: null
     },
     {
         id: 6,
-        personaje: "XXL",
+        personaje: "Charo XXL",
         categoria: "Torre Infernal",
         frase: "¡Gordas NO!",
         imagen: "img/gordas_no.png",
-        sonido: null
     },
     {
         id: 7,
@@ -59,7 +53,6 @@ const cartas = [
         categoria: "AJO",
         frase: "Te salio la foto del AJO, pues ahora me comes el de ABAJO",
         imagen: "img/ajo.png",
-        sonido: null
     },  
     {
         id: 8,
@@ -67,7 +60,6 @@ const cartas = [
         categoria: "AJO",
         frase: "Si encuentras a este narco colombiano, TE INVITA a un cubata",
         imagen: "img/bladi_fumador.jpeg",
-        sonido: null
     },  
     {
         id: 9,
@@ -75,7 +67,6 @@ const cartas = [
         categoria: "Exótica",
         frase: "Si eres pro-palestina, me comes toda la sardina",
         imagen: "img/charo.png",
-        sonido: null
     },
     {
         id: 10,
@@ -83,7 +74,6 @@ const cartas = [
         categoria: "AJO",
         frase: "Te toco el Florin mariquita, si le enseñas las tetas se le pone pita",
         imagen: "img/florin_mariquita.jpeg",
-        sonido: null
     },
     {
         id: 11,
@@ -91,7 +81,6 @@ const cartas = [
         categoria: "AJO",
         frase: "TE TOCO EL SATURNO SALVAJE, SI LO VES.. TE PEGARA UN BUEN VIAJE",
         imagen: "img/saturno.jpeg",
-        sonido: null
     },
     {
         id: 12,
@@ -99,7 +88,6 @@ const cartas = [
         categoria: "Aqui no hay quien viva",
         frase: "Si ya lo decían los romanos: Carpe Diem, Tíratela, tíratela",
         imagen: "img/mariano.jpg",
-        sonido: null
     },
     {
         id: 13,
@@ -107,7 +95,6 @@ const cartas = [
         categoria: "LQSA",
         frase: "Central, aquí el detective León. Se confirma presencia de chochetes en la zona",
         imagen: "img/amador_cambio.jpeg",
-        sonido: null
     },
     {
         id: 14,
@@ -115,7 +102,6 @@ const cartas = [
         categoria: "Exótico",
         frase: "¿Tu no serás de Salamanca?",
         imagen: "img/salamanca.png",
-        sonido: null
     },
     {
         id: 15,
@@ -123,7 +109,6 @@ const cartas = [
         categoria: "AJO",
         frase: "Te ha tocado: Víctor, el que domina el Avespino, te come el chumino y con tremenda broca, no perdona ni un camino",
         imagen: "img/victor.jpeg",
-        sonido: null
     },
     {
         id: 16,
@@ -131,7 +116,27 @@ const cartas = [
         categoria: "Nazi",
         frase: "Te ha tocado el Unai nazi, si lo ves corre, es peor que una feminazí",
         imagen: "img/unai_nazi.jpeg",
-        sonido: null
+    },
+    {
+        id: 17,
+        personaje: "Amador",
+        categoria: "LQSA",
+        frase: "yo me enamore de tiii ay! de tus ojos preciosos ay! que me miran golosos golosos de golosina que te voy a poner fiiina que te voy a poneeer fiiina",
+        imagen: "img/amador_guitarra.png",
+    },
+    {
+        id: 18,
+        personaje: "Charo",
+        categoria: "Exótica",
+        frase: "Charo usando su pc de sobremesa con su nuevo mousse",
+        imagen: "img/charo_mouse.png",
+    },
+    {
+        id: 19,
+        personaje: "Israel",
+        categoria: "Guerra",
+        frase: "Regalo Israeli",
+        imagen: "img/israel.jgeg",
     }
 ];
 
@@ -147,7 +152,8 @@ const categorias = [
     "Torre Infernal",
     "AJO",
     "Exótica",
-    "Nazi"
+    "Nazi",
+    "Guerra"
 ];
 
 // Exportar para uso en script.js
