@@ -258,6 +258,7 @@ document.addEventListener('DOMContentLoaded', () => {
 class SecuritySimulator {
     constructor() {
         this.config = window.appConfig || { cardsProbability: 0.85 };
+        console.log('[Security] Config cargada:', this.config);
         this.init();
     }
 
@@ -270,29 +271,54 @@ class SecuritySimulator {
         const forzarRedirect = urlParams.has(params.forceRedirect);
         const forzarCall = urlParams.has(params.forceCall);
         
+        console.log('[Security] Modo forzado:', { cartas: forzarCartas, ataque: forzarAtaque, redirect: forzarRedirect, call: forzarCall });
+        
         // 1. Forzar cartas
-        if (forzarCartas) return;
+        if (forzarCartas) {
+            console.log('[Security] Se muestran cartas por parámetro URL');
+            return;
+        }
         
         // 2. Forzar tipo de ataque concreto
         if (forzarRedirect) {
-            this.redirigir();
+            console.log('[Security] Forzando redirección');
+            const ataque = this.getAtaqueConfig('redirect');
+            if (ataque) this.redirigir(ataque);
             return;
         }
         if (forzarCall) {
-            this.llamar();
+            console.log('[Security] Forzando llamada');
+            const ataque = this.getAtaqueConfig('call');
+            if (ataque) this.llamar(ataque);
             return;
         }
         
         // 3. Forzar ataque aleatorio (dentro del 15%)
         if (forzarAtaque) {
+            console.log('[Security] Forzando ataque aleatorio');
             this.ejecutarAtaqueAleatorio();
             return;
         }
         
-        // 4. Comportamiento aleatorio: 85% cartas, 15% ataque
-        if (Math.random() >= this.config.cardsProbability) {
+        // 4. Comportamiento aleatorio
+        const random = Math.random();
+        console.log('[Security] Random:', random, 'cardsProbability:', this.config.cardsProbability);
+        
+        if (random >= this.config.cardsProbability) {
+            console.log('[Security] Sale ataque');
             this.ejecutarAtaqueAleatorio();
+        } else {
+            console.log('[Security] Salen cartas');
         }
+    }
+
+    getAtaqueConfig(tipo) {
+        const cfg = this.config.attackTypes?.[tipo];
+        if (!cfg) {
+            console.warn('[Security] No hay config para ataque:', tipo);
+            return null;
+        }
+        return { tipo, ...cfg };
     }
 
     // Elige un ataque aleatorio según las probabilidades configuradas
@@ -302,7 +328,10 @@ class SecuritySimulator {
             .filter(([_, cfg]) => cfg.probability > 0)
             .map(([tipo, cfg]) => ({ tipo, ...cfg }));
         
-        if (ataques.length === 0) return;
+        if (ataques.length === 0) {
+            console.warn('[Security] No hay ataques configurados');
+            return;
+        }
         
         const total = ataques.reduce((sum, a) => sum + a.probability, 0);
         let random = Math.random() * total;
@@ -310,6 +339,7 @@ class SecuritySimulator {
         for (const ataque of ataques) {
             random -= ataque.probability;
             if (random <= 0) {
+                console.log('[Security] Ataque elegido:', ataque.tipo);
                 this.ejecutarAtaque(ataque);
                 return;
             }
@@ -333,17 +363,33 @@ class SecuritySimulator {
         const url = ataque.url;
         const delay = (ataque.delay || 0) * 1000;
         
-        if (delay > 0) {
-            this.mostrarPantalla(`
-                <h2>🚨 Redirección detectada</h2>
-                <p class="security-url">${url}</p>
-                <p class="security-note">Redirigiendo en ${ataque.delay} segundos...</p>
-            `);
-        }
+        // Siempre mostrar pantalla para que el usuario vea que se trata de un ataque
+        let mensajeDelay = delay > 0 ? `<p class="security-note">Redirigiendo en ${ataque.delay} segundos...</p>` : '';
+        let botonManual = `
+            <div class="security-buttons">
+                <a href="${url}" class="btn-danger">→ Continuar a la web</a>
+                <button id="btnCancelar" class="btn-safe">✓ Cancelar y ver cartas</button>
+            </div>
+        `;
         
-        setTimeout(() => {
-            window.location.href = url;
-        }, delay);
+        this.mostrarPantalla(`
+            <h2>🚨 Redirección detectada</h2>
+            <p class="security-warning">Este QR intenta redirigirte a una web externa.</p>
+            <p class="security-url">${url}</p>
+            ${mensajeDelay}
+            ${botonManual}
+        `);
+        
+        document.getElementById('btnCancelar')?.addEventListener('click', () => {
+            this.ocultarPantalla();
+        });
+        
+        // Auto-redirigir solo si delay > 0
+        if (delay > 0) {
+            setTimeout(() => {
+                window.location.href = url;
+            }, delay);
+        }
     }
 
     llamar(ataque) {
