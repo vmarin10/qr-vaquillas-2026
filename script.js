@@ -254,79 +254,176 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 100);
 });
 
-// Simulación de seguridad: redirección maliciosa por QR
+// Simulación de seguridad: sistema de ataques QR configurable
 class SecuritySimulator {
     constructor() {
-        this.urlUniversidad = 'https://www.unizar.es/';
-        this.urlSegura = 'https://es.wikipedia.org/wiki/C%C3%B3digo_QR#Seguridad';
+        this.config = window.appConfig || {};
+        this.ataquesConfig = this.config.attacks || { enabled: false, types: {} };
+        this.debug = this.config.debug || false;
         
         this.init();
     }
 
     init() {
         const urlParams = new URLSearchParams(window.location.search);
-        const forzarSeguridad = urlParams.has('security');
-        const forzarRedireccion = urlParams.has('redirect');
-        const probabilidadRedireccion = Math.random() < 0.50; // 50% de probabilidad
+        const params = this.config.queryParams || {};
         
-        // Modo educativo: mostrar modal explicativo
+        const forzarCartas = urlParams.has(params.forceCards);
+        const forzarAtaque = urlParams.has(params.forceAttack);
+        const forzarRedireccion = urlParams.has(params.forceRedirect);
+        const forzarSeguridad = urlParams.has(params.forceSecurity);
+        
+        // Log de debug
+        this.log('Inicializando SecuritySimulator');
+        this.log('cardsProbability:', this.config.cardsProbability);
+        
+        // 1. Forzar mostrar cartas
+        if (forzarCartas) {
+            this.log('Modo forzado: cartas');
+            return;
+        }
+        
+        // 2. Forzar un ataque específico
+        if (forzarRedireccion) {
+            this.log('Modo forzado: redirección');
+            this.ejecutarAtaque('redirect');
+            return;
+        }
+        
+        if (forzarAtaque) {
+            this.log('Modo forzado: ataque aleatorio');
+            this.ejecutarAtaqueAleatorio();
+            return;
+        }
+        
+        // 3. Modo educativo: mostrar modal explicativo
         if (forzarSeguridad) {
-            this.mostrarModal(this.urlUniversidad, 'Esta redirección es una simulación de prácticas de la Universidad de Zaragoza.');
+            this.log('Modo forzado: educativo');
+            const ataque = this.getAtaque('redirect');
+            if (ataque) this.mostrarModal(ataque);
             return;
         }
         
-        // Redirección automática aleatoria
-        if (forzarRedireccion || probabilidadRedireccion) {
-            this.redirigir(this.urlUniversidad);
+        // 4. Comportamiento aleatorio configurable
+        // 85% cartas, 15% ataques (por defecto en appConfig)
+        const random = Math.random();
+        this.log('Random generado:', random);
+        
+        if (random < this.config.cardsProbability) {
+            this.log('Resultado: mostrando cartas normales');
             return;
         }
         
-        // Si no redirige, la web funciona normalmente (cartas aleatorias)
-        console.log('SecuritySimulator: mostrando contenido normal de cartas');
+        this.log('Resultado: ejecutando ataque');
+        this.ejecutarAtaqueAleatorio();
     }
 
-    redirigir(url) {
-        // Mostrar mensaje temporal antes de redirigir
-        this.mostrarPantallaRedireccion(url);
+    // Obtener un ataque por su nombre
+    getAtaque(tipo) {
+        const ataque = this.ataquesConfig.types[tipo];
+        if (!ataque || !ataque.enabled) return null;
+        return { tipo, ...ataque };
+    }
+
+    // Seleccionar un ataque aleatorio entre los habilitados, respetando probabilidades
+    seleccionarAtaqueAleatorio() {
+        const ataques = Object.entries(this.ataquesConfig.types)
+            .filter(([_, ataque]) => ataque.enabled)
+            .map(([tipo, ataque]) => ({ tipo, ...ataque }));
         
-        // Redirigir después de 3 segundos para que el usuario lea el aviso
+        if (ataques.length === 0) return null;
+        
+        // Calcular peso total
+        const pesoTotal = ataques.reduce((sum, ataque) => sum + (ataque.probability || 1), 0);
+        let random = Math.random() * pesoTotal;
+        
+        for (const ataque of ataques) {
+            random -= (ataque.probability || 1);
+            if (random <= 0) return ataque;
+        }
+        
+        return ataques[ataques.length - 1];
+    }
+
+    ejecutarAtaqueAleatorio() {
+        if (!this.ataquesConfig.enabled) {
+            this.log('Ataques deshabilitados, mostrando cartas');
+            return;
+        }
+        
+        const ataque = this.seleccionarAtaqueAleatorio();
+        if (!ataque) {
+            this.log('No hay ataques habilitados, mostrando cartas');
+            return;
+        }
+        
+        this.ejecutarAtaque(ataque.tipo);
+    }
+
+    ejecutarAtaque(tipo) {
+        const ataque = this.getAtaque(tipo);
+        if (!ataque) {
+            this.log('Ataque no encontrado o deshabilitado:', tipo);
+            return;
+        }
+        
+        this.log('Ejecutando ataque:', tipo);
+        
+        switch (tipo) {
+            case 'redirect':
+                this.redirigir(ataque);
+                break;
+            // Aquí se pueden añadir más tipos de ataque en el futuro:
+            // case 'phishing': this.phishing(ataque); break;
+            // case 'call': this.call(ataque); break;
+            // case 'clipboard': this.clipboard(ataque); break;
+            default:
+                this.log('Tipo de ataque no implementado:', tipo);
+        }
+    }
+
+    // ===== ATAQUE: REDIRECCIÓN =====
+    redirigir(ataque) {
+        const url = ataque.url;
+        const delayMs = (ataque.redirectDelay || 3) * 1000;
+        
+        this.mostrarPantallaRedireccion(ataque);
+        
         setTimeout(() => {
-            console.log('SecuritySimulator: redirigiendo a', url);
+            this.log('Redirigiendo a:', url);
             window.location.href = url;
-        }, 3000);
+        }, delayMs);
     }
 
-    mostrarPantallaRedireccion(url) {
-        // Ocultar el contenido principal
+    mostrarPantallaRedireccion(ataque) {
         const container = document.querySelector('.container');
         if (container) {
             container.style.display = 'none';
         }
         
-        // Crear pantalla de redirección
         const redirectScreen = document.createElement('div');
         redirectScreen.className = 'security-modal';
         redirectScreen.style.display = 'flex';
         redirectScreen.id = 'redirectScreen';
         redirectScreen.innerHTML = `
             <div class="security-modal-content">
-                <h2>🚨 Simulación de Seguridad Informática</h2>
-                <p class="security-warning">Este QR ha redirigido tu dispositivo a una web externa.</p>
-                <p class="security-url">${url}</p>
-                <p>En un caso real, un QR malicioso podría llevarte a:</p>
+                <h2>${ataque.title}</h2>
+                <p class="security-warning">${ataque.description}</p>
+                <p class="security-url">${ataque.url}</p>
+                <p>${ataque.warningText}</p>
                 <ul>
                     <li>Páginas de phishing</li>
                     <li>Descargas de malware</li>
                     <li>Sitios de suplantación de identidad</li>
                 </ul>
-                <p class="security-note">Redirigiendo en 3 segundos... (práctica educativa Unizar)</p>
+                <p class="security-note">Redirigiendo en ${ataque.redirectDelay || 3} segundos... (práctica educativa Unizar)</p>
             </div>
         `;
         
         document.body.appendChild(redirectScreen);
     }
 
-    mostrarModal(url, mensajeExtra) {
+    mostrarModal(ataque) {
         const modal = document.getElementById('securityModal');
         const urlElement = document.getElementById('maliciousUrl');
         const btnRedirect = document.getElementById('btnRedirect');
@@ -337,24 +434,26 @@ class SecuritySimulator {
             return;
         }
         
-        urlElement.textContent = url;
+        urlElement.textContent = ataque.url;
+        btnRedirect.textContent = ataque.buttons?.redirect || '→ Redirigir ahora';
+        btnClose.textContent = ataque.buttons?.close || '✓ Cerrar advertencia';
         
-        // Actualizar texto del botón
-        btnRedirect.textContent = '→ Redirigir a la Universidad';
-        
-        // Mostrar modal
         modal.style.display = 'flex';
         
-        // Botón redirigir
         btnRedirect.addEventListener('click', () => {
-            console.log('Simulación: redirigiendo a Universidad de Zaragoza');
-            window.location.href = url;
+            this.log('Redirigiendo desde modal a:', ataque.url);
+            window.location.href = ataque.url;
         });
         
-        // Botón cerrar
         btnClose.addEventListener('click', () => {
             modal.style.display = 'none';
         });
+    }
+
+    log(...args) {
+        if (this.debug) {
+            console.log('[SecuritySimulator]', ...args);
+        }
     }
 }
 
