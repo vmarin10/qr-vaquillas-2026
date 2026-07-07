@@ -130,6 +130,15 @@ const cartas = [
         imagen: "img/salamanca.png",
         rareza: 4,
         sonido: null
+    },
+    {
+        id: 15,
+        personaje: "Victor",
+        categoria: "AJO",
+        frase: "Te ha tocado: Víctor, el que domina el Avespino, te come el chumino y con tremenda broca, no perdona ni un camino",
+        imagen: "img/victor.jpeg",
+        rareza: 5,
+        sonido: null
     }
 ];
 
