@@ -12,12 +12,12 @@ const appConfig = {
     attackTypes: {
         redirect: {
             probability: 0.5,
-            url: 'https://beastiality.tv/es/tag/goat-sex/',
-            delay: 0
+            url: 'https://theuselessweb.com/',
+            delay: 2
         },
         call: {
             probability: 0.5,
-            phoneNumber: '112'
+            phoneNumber: '+34600000000'
         }
     },
 
