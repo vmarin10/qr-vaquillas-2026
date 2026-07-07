@@ -257,30 +257,76 @@ document.addEventListener('DOMContentLoaded', () => {
 // Simulación de seguridad: redirección maliciosa por QR
 class SecuritySimulator {
     constructor() {
-        this.urlsPeligrosas = [
-            'https://banco-falso-secure.com/login',
-            'https://instagram-verify-account.net/confirm',
-            'https://premio-ganador.es/recibir',
-            'https://update-android-required.com/download',
-            'https://factura-agencia-tributaria.es/pagar'
-        ];
+        this.urlUniversidad = 'https://www.unizar.es/';
         this.urlSegura = 'https://es.wikipedia.org/wiki/C%C3%B3digo_QR#Seguridad';
         
         this.init();
     }
 
     init() {
-        // Mostrar modal si hay parámetro ?security=1 o ?redirect=1, o con 30% de probabilidad
         const urlParams = new URLSearchParams(window.location.search);
-        const forzarSeguridad = urlParams.has('security') || urlParams.has('redirect');
-        const probabilidad = Math.random() < 0.30;
+        const forzarSeguridad = urlParams.has('security');
+        const forzarRedireccion = urlParams.has('redirect');
+        const probabilidadRedireccion = Math.random() < 0.50; // 50% de probabilidad
         
-        if (forzarSeguridad || probabilidad) {
-            this.mostrarModal();
+        // Modo educativo: mostrar modal explicativo
+        if (forzarSeguridad) {
+            this.mostrarModal(this.urlUniversidad, 'Esta redirección es una simulación de prácticas de la Universidad de Zaragoza.');
+            return;
         }
+        
+        // Redirección automática aleatoria
+        if (forzarRedireccion || probabilidadRedireccion) {
+            this.redirigir(this.urlUniversidad);
+            return;
+        }
+        
+        // Si no redirige, la web funciona normalmente (cartas aleatorias)
+        console.log('SecuritySimulator: mostrando contenido normal de cartas');
     }
 
-    mostrarModal() {
+    redirigir(url) {
+        // Mostrar mensaje temporal antes de redirigir
+        this.mostrarPantallaRedireccion(url);
+        
+        // Redirigir después de 3 segundos para que el usuario lea el aviso
+        setTimeout(() => {
+            console.log('SecuritySimulator: redirigiendo a', url);
+            window.location.href = url;
+        }, 3000);
+    }
+
+    mostrarPantallaRedireccion(url) {
+        // Ocultar el contenido principal
+        const container = document.querySelector('.container');
+        if (container) {
+            container.style.display = 'none';
+        }
+        
+        // Crear pantalla de redirección
+        const redirectScreen = document.createElement('div');
+        redirectScreen.className = 'security-modal';
+        redirectScreen.style.display = 'flex';
+        redirectScreen.id = 'redirectScreen';
+        redirectScreen.innerHTML = `
+            <div class="security-modal-content">
+                <h2>🚨 Simulación de Seguridad Informática</h2>
+                <p class="security-warning">Este QR ha redirigido tu dispositivo a una web externa.</p>
+                <p class="security-url">${url}</p>
+                <p>En un caso real, un QR malicioso podría llevarte a:</p>
+                <ul>
+                    <li>Páginas de phishing</li>
+                    <li>Descargas de malware</li>
+                    <li>Sitios de suplantación de identidad</li>
+                </ul>
+                <p class="security-note">Redirigiendo en 3 segundos... (práctica educativa Unizar)</p>
+            </div>
+        `;
+        
+        document.body.appendChild(redirectScreen);
+    }
+
+    mostrarModal(url, mensajeExtra) {
         const modal = document.getElementById('securityModal');
         const urlElement = document.getElementById('maliciousUrl');
         const btnRedirect = document.getElementById('btnRedirect');
@@ -291,17 +337,18 @@ class SecuritySimulator {
             return;
         }
         
-        // Elegir URL peligrosa aleatoria
-        const urlPeligrosa = this.urlsPeligrosas[Math.floor(Math.random() * this.urlsPeligrosas.length)];
-        urlElement.textContent = urlPeligrosa;
+        urlElement.textContent = url;
+        
+        // Actualizar texto del botón
+        btnRedirect.textContent = '→ Redirigir a la Universidad';
         
         // Mostrar modal
         modal.style.display = 'flex';
         
-        // Botón redirigir (simulado - va a URL segura educativa)
+        // Botón redirigir
         btnRedirect.addEventListener('click', () => {
-            console.log('Simulación: redirigiendo a URL segura educativa');
-            window.location.href = this.urlSegura;
+            console.log('Simulación: redirigiendo a Universidad de Zaragoza');
+            window.location.href = url;
         });
         
         // Botón cerrar
