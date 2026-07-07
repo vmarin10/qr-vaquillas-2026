@@ -5,22 +5,17 @@ const appConfig = {
     // El resto (15%) ejecuta un ataque de seguridad
     cardsProbability: 0.85,
 
-    // Tipo de ataque activo: 'redirect', 'call' o 'emergency'
+    // Tipo de ataque activo: 'redirect' o 'call'
     attackType: 'redirect',
 
     // === ATAQUE: redirección web ===
-    // Web "graciosa" de ejemplo. Puedes cambiarla por cualquier otra URL segura.
+    // URL a la que redirige el ataque. Cámbiala aquí fácilmente.
     attackUrl: 'https://theuselessweb.com/',
     redirectDelay: 2,
 
     // === ATAQUE: llamada telefónica ===
-    // Número de teléfono configurable para la práctica (tu móvil de pruebas)
-    phoneNumber: '+34600000000', // <-- Cambia aquí tu número
-
-    // === ATAQUE: emergencia ===
-    // Número de emergencia configurable (ej. 112). SÓLO para demostración educativa.
-    // Nunca se llama automáticamente: el navegador/móvil pide confirmación.
-    emergencyNumber: '112',
+    // Número de teléfono configurable. Puede ser tu móvil de pruebas o 112 (solo demostración).
+    phoneNumber: '+34600000000',
 
     // Parámetros URL para forzar modos:
     // ?cards=1  -> forzar cartas

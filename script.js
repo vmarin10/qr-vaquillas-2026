@@ -284,17 +284,14 @@ class SecuritySimulator {
     }
 
     ejecutarAtaque() {
-        const tipo = this.config.attackType || 'redirect';
+        const tipo = this.config.attackType;
         
         switch (tipo) {
             case 'redirect':
                 this.redirigir();
                 break;
             case 'call':
-                this.llamar(this.config.phoneNumber || '+34600000000', false);
-                break;
-            case 'emergency':
-                this.llamar(this.config.emergencyNumber || '112', true);
+                this.llamar();
                 break;
             default:
                 console.warn('Tipo de ataque no implementado:', tipo);
@@ -302,7 +299,7 @@ class SecuritySimulator {
     }
 
     redirigir() {
-        const url = this.config.attackUrl || 'https://theuselessweb.com/';
+        const url = this.config.attackUrl;
         const delay = (this.config.redirectDelay || 0) * 1000;
         
         if (delay > 0) {
@@ -318,38 +315,20 @@ class SecuritySimulator {
         }, delay);
     }
 
-    llamar(numero, esEmergencia) {
+    llamar() {
+        const numero = this.config.phoneNumber;
         const telUrl = `tel:${numero}`;
         
-        let contenido;
-        if (esEmergencia) {
-            contenido = `
-                <h2>⚠️ EMERGENCIA SIMULADA</h2>
-                <p class="security-warning">Este QR intentaría llamar a un número de emergencias.</p>
-                <p class="security-url">${numero}</p>
-                <p class="security-note" style="color:#dc3545; font-weight:bold;">
-                    ⚠️ En la vida real, esto es ilegal y peligroso. <br>
-                    ⚠️ Nunca bloquees líneas de emergencia. Esta pantalla solo sirve para concienciar.
-                </p>
-                <div class="security-buttons">
-                    <a href="${telUrl}" class="btn-danger">📞 Llamar (solo prueba)</a>
-                    <button id="btnCancelar" class="btn-safe">✓ Cancelar</button>
-                </div>
-            `;
-        } else {
-            contenido = `
-                <h2>🚨 Llamada detectada</h2>
-                <p class="security-warning">Este QR podría iniciar una llamada telefónica.</p>
-                <p class="security-url">${numero}</p>
-                <p class="security-note">Los móviles suelen pedir confirmación antes de llamar. Nunca uses esto para emergencias o números de pago.</p>
-                <div class="security-buttons">
-                    <a href="${telUrl}" class="btn-danger">📞 Llamar ahora</a>
-                    <button id="btnCancelar" class="btn-safe">✓ Cancelar y ver cartas</button>
-                </div>
-            `;
-        }
-        
-        this.mostrarPantalla(contenido);
+        this.mostrarPantalla(`
+            <h2>🚨 Llamada detectada</h2>
+            <p class="security-warning">Este QR podría iniciar una llamada telefónica.</p>
+            <p class="security-url">${numero}</p>
+            <p class="security-note">Los móviles suelen pedir confirmación antes de llamar. Nunca uses esto para emergencias o números de pago.</p>
+            <div class="security-buttons">
+                <a href="${telUrl}" class="btn-danger">📞 Llamar ahora</a>
+                <button id="btnCancelar" class="btn-safe">✓ Cancelar y ver cartas</button>
+            </div>
+        `);
         
         document.getElementById('btnCancelar')?.addEventListener('click', () => {
             this.ocultarPantalla();
