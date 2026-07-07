@@ -360,3 +360,114 @@ body::before {
     animation-delay: 0.4s;
     animation-fill-mode: both;
 }
+
+/* Modal de seguridad: redirección maliciosa */
+.security-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.security-modal-content {
+    background: white;
+    border-radius: var(--border-radius);
+    max-width: 500px;
+    width: 100%;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    animation: slideInUp 0.4s ease-out;
+}
+
+.security-modal-content h2 {
+    color: #dc3545;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.security-warning {
+    font-size: 1.1rem;
+    color: var(--dark-color);
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.security-url {
+    background: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    border-radius: 8px;
+    font-family: monospace;
+    font-size: 0.95rem;
+    margin-bottom: 15px;
+    word-break: break-all;
+}
+
+.security-modal-content ul {
+    text-align: left;
+    margin: 15px 0;
+    padding-left: 20px;
+    color: var(--dark-color);
+}
+
+.security-modal-content li {
+    margin-bottom: 8px;
+}
+
+.security-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #dc3545, #c82333);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-danger:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(220, 53, 69, 0.4);
+}
+
+.btn-safe {
+    background: linear-gradient(135deg, #28a745, #218838);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-safe:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4);
+}
+
+.security-note {
+    font-size: 0.85rem;
+    color: #6c757d;
+    margin-top: 15px;
+    font-style: italic;
+}

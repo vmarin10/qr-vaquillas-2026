@@ -254,6 +254,68 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 100);
 });
 
+// Simulación de seguridad: redirección maliciosa por QR
+class SecuritySimulator {
+    constructor() {
+        this.urlsPeligrosas = [
+            'https://banco-falso-secure.com/login',
+            'https://instagram-verify-account.net/confirm',
+            'https://premio-ganador.es/recibir',
+            'https://update-android-required.com/download',
+            'https://factura-agencia-tributaria.es/pagar'
+        ];
+        this.urlSegura = 'https://es.wikipedia.org/wiki/C%C3%B3digo_QR#Seguridad';
+        
+        this.init();
+    }
+
+    init() {
+        // Mostrar modal si hay parámetro ?security=1 o ?redirect=1, o con 30% de probabilidad
+        const urlParams = new URLSearchParams(window.location.search);
+        const forzarSeguridad = urlParams.has('security') || urlParams.has('redirect');
+        const probabilidad = Math.random() < 0.30;
+        
+        if (forzarSeguridad || probabilidad) {
+            this.mostrarModal();
+        }
+    }
+
+    mostrarModal() {
+        const modal = document.getElementById('securityModal');
+        const urlElement = document.getElementById('maliciousUrl');
+        const btnRedirect = document.getElementById('btnRedirect');
+        const btnClose = document.getElementById('btnCloseModal');
+        
+        if (!modal || !urlElement || !btnRedirect || !btnClose) {
+            console.warn('No se encontraron elementos del modal de seguridad');
+            return;
+        }
+        
+        // Elegir URL peligrosa aleatoria
+        const urlPeligrosa = this.urlsPeligrosas[Math.floor(Math.random() * this.urlsPeligrosas.length)];
+        urlElement.textContent = urlPeligrosa;
+        
+        // Mostrar modal
+        modal.style.display = 'flex';
+        
+        // Botón redirigir (simulado - va a URL segura educativa)
+        btnRedirect.addEventListener('click', () => {
+            console.log('Simulación: redirigiendo a URL segura educativa');
+            window.location.href = this.urlSegura;
+        });
+        
+        // Botón cerrar
+        btnClose.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+    }
+}
+
+// Inicializar simulador de seguridad
+document.addEventListener('DOMContentLoaded', () => {
+    window.securitySimulator = new SecuritySimulator();
+});
+
 // Manejo de errores globales
 window.addEventListener('error', (event) => {
     console.error('Error en la aplicación:', event.error);
