@@ -1,6 +1,6 @@
 // Configuración global de la aplicación QR Vaquillas 2026
 
-const appConfig = {
+var appConfig = {
     // Probabilidad temporal para pruebas: 0% cartas, 100% ataques
     // Después de probar, volver a 0.85
     cardsProbability: 0,
