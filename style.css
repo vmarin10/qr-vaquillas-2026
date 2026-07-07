@@ -243,22 +243,6 @@ body::before {
     margin-bottom: 10px;
 }
 
-.card-rareza {
-    display: flex;
-    align-items: center;
-    gap: 2px;
-    font-size: 1.2rem;
-}
-
-.estrella {
-    color: #ffd700;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-}
-
-.estrella.vacia {
-    color: #ddd;
-}
-
 /* Botón principal */
 .btn-primary {
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
@@ -330,7 +314,16 @@ body::before {
     }
     
     .card-container {
-        min-height: 350px;
+        min-height: 420px;
+    }
+    
+    .card-image {
+        height: 260px; /* Fotos más grandes en móvil */
+        padding: 5px;
+    }
+    
+    .card-image-placeholder {
+        height: 260px;
     }
     
     .card-frase {

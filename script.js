@@ -77,9 +77,6 @@ class QRVaquillas {
     }
 
     crearHTMLCarta(carta) {
-        const rarezaTexto = window.configuracionRareza?.[carta.rareza] || 'Común';
-        const estrellasHTML = this.crearEstrellas(carta.rareza);
-        
         // Determinar clase CSS según longitud de frase
         let fraseClass = 'card-frase';
         if (carta.frase.length > 100) {
@@ -100,21 +97,9 @@ class QRVaquillas {
                     <div class="${fraseClass}">"${carta.frase}"</div>
                     <div class="card-personaje">👤 ${carta.personaje}</div>
                     <div class="card-categoria">🏷️ ${carta.categoria}</div>
-                    <div class="card-rareza">
-                        <span class="rareza-texto">${rarezaTexto}</span>
-                        ${estrellasHTML}
-                    </div>
                 </div>
             </div>
         `;
-    }
-
-    crearEstrellas(rareza) {
-        let estrellas = '';
-        for (let i = 1; i <= 5; i++) {
-            estrellas += `<span class="estrella ${i <= rareza ? '' : 'vacia'}">★</span>`;
-        }
-        return estrellas;
     }
 
     async mostrarCartaAleatoria() {
