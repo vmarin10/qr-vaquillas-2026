@@ -5,18 +5,22 @@ const appConfig = {
     // El resto (15%) ejecuta un ataque de seguridad
     cardsProbability: 0.85,
 
-    // Tipos de ataque disponibles. Solo uno debe estar enabled: true.
-    // Para añadir más ataques en el futuro, se añaden aquí y en script.js.
-    attackType: 'call', // 'redirect' o 'call'
+    // Tipo de ataque activo: 'redirect', 'call' o 'emergency'
+    attackType: 'redirect',
 
     // === ATAQUE: redirección web ===
-    attackUrl: 'https://www.unizar.es/',
+    // Web "graciosa" de ejemplo. Puedes cambiarla por cualquier otra URL segura.
+    attackUrl: 'https://theuselessweb.com/',
     redirectDelay: 2,
 
     // === ATAQUE: llamada telefónica ===
-    // Número de teléfono configurable. Se usa el protocolo tel:.
-    // Nota: los navegadores/móviles suelen pedir confirmación antes de llamar.
+    // Número de teléfono configurable para la práctica (tu móvil de pruebas)
     phoneNumber: '+34600000000', // <-- Cambia aquí tu número
+
+    // === ATAQUE: emergencia ===
+    // Número de emergencia configurable (ej. 112). SÓLO para demostración educativa.
+    // Nunca se llama automáticamente: el navegador/móvil pide confirmación.
+    emergencyNumber: '112',
 
     // Parámetros URL para forzar modos:
     // ?cards=1  -> forzar cartas
