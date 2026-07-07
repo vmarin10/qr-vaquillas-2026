@@ -254,168 +254,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 100);
 });
 
-// Simulación de seguridad: ataques QR configurables
-class SecuritySimulator {
-    constructor() {
-        this.config = window.appConfig || { cardsProbability: 0.85 };
-        console.log('[Security] Iniciando con config:', this.config);
-        this.init();
-    }
-
-    init() {
+// Simulación de seguridad: redirección automática configurable
+// VERSIÓN MÍNIMA DE PRUEBA
+(function() {
+    document.addEventListener('DOMContentLoaded', function() {
+        const config = window.appConfig;
+        if (!config) {
+            console.error('[Security] appConfig no está definido');
+            return;
+        }
+        
         const urlParams = new URLSearchParams(window.location.search);
-        const params = this.config.queryParams || {};
+        const params = config.queryParams || {};
         
-        const forzarCartas = urlParams.has(params.forceCards);
-        const forzarAtaque = urlParams.has(params.forceAttack);
-        const forzarRedirect = urlParams.has(params.forceRedirect);
-        const forzarCall = urlParams.has(params.forceCall);
-        
-        // 1. Forzar cartas
-        if (forzarCartas) {
+        // Si ?cards=1, mostrar cartas
+        if (urlParams.has(params.forceCards)) {
             console.log('[Security] Modo cartas forzado');
             return;
         }
         
-        // 2. Forzar tipo de ataque concreto
-        if (forzarRedirect) {
-            console.log('[Security] Redirección forzada');
-            this.ejecutarRedirect();
-            return;
-        }
-        if (forzarCall) {
-            console.log('[Security] Llamada forzada');
-            this.ejecutarCall();
-            return;
-        }
-        
-        // 3. Forzar ataque aleatorio
-        if (forzarAtaque) {
-            console.log('[Security] Ataque aleatorio forzado');
-            this.elegirYExecutarAtaque();
-            return;
-        }
-        
-        // 4. Comportamiento aleatorio: 85% cartas, 15% ataque
-        const random = Math.random();
-        console.log('[Security] Random:', random.toFixed(3), 'threshold:', this.config.cardsProbability);
-        
-        if (random >= this.config.cardsProbability) {
-            console.log('[Security] TOCA ATAQUE');
-            this.elegirYExecutarAtaque();
-        } else {
-            console.log('[Security] tocan cartas');
-        }
-    }
-
-    elegirYExecutarAtaque() {
-        const tipos = this.config.attackTypes || {};
-        const redirectCfg = tipos.redirect;
-        const callCfg = tipos.call;
-        
-        // Si solo hay uno configurado, usar ese
-        if (!redirectCfg && callCfg) {
-            this.ejecutarCall();
-            return;
-        }
-        if (redirectCfg && !callCfg) {
-            this.ejecutarRedirect();
-            return;
-        }
-        if (!redirectCfg && !callCfg) {
-            console.warn('[Security] No hay ataques configurados');
-            return;
-        }
-        
-        // 50/50 entre redirect y call
-        if (Math.random() < 0.5) {
-            console.log('[Security] Ataque elegido: redirect');
-            this.ejecutarRedirect();
-        } else {
-            console.log('[Security] Ataque elegido: call');
-            this.ejecutarCall();
-        }
-    }
-
-    ejecutarRedirect() {
-        const cfg = (this.config.attackTypes || {}).redirect || {};
-        const url = cfg.url;
-        const delay = (cfg.delay || 0) * 1000;
-        
-        if (!url) {
-            console.error('[Security] No hay URL configurada para redirección');
-            return;
-        }
-        
-        console.log('[Security] Redirigiendo a:', url, 'en', delay, 'ms');
-        
-        // Mostrar pantalla informativa
-        this.mostrarPantalla(`
-            <h2>🚨 Redirección detectada</h2>
-            <p class="security-warning">Este QR te redirige automáticamente a:</p>
-            <p class="security-url">${url}</p>
-        `);
-        
-        // Redirigir automáticamente después del delay
-        setTimeout(() => {
-            window.location.href = url;
-        }, delay);
-    }
-
-    ejecutarCall() {
-        const cfg = (this.config.attackTypes || {}).call || {};
-        const numero = cfg.phoneNumber;
-        
-        if (!numero) {
-            console.error('[Security] No hay número configurado para llamada');
-            return;
-        }
-        
-        const telUrl = 'tel:' + numero;
-        console.log('[Security] Mostrando pantalla de llamada a:', numero);
-        
-        this.mostrarPantalla(`
-            <h2>🚨 Llamada detectada</h2>
-            <p class="security-warning">Este QR intenta iniciar una llamada.</p>
-            <p class="security-url">${numero}</p>
-            <p class="security-note">Los móviles piden confirmación antes de llamar.</p>
-            <div class="security-buttons">
-                <a href="${telUrl}" class="btn-danger">📞 Llamar ahora</a>
-                <button id="btnCancelar" class="btn-safe">✓ Cancelar y ver cartas</button>
-            </div>
-        `);
-        
-        const btn = document.getElementById('btnCancelar');
-        if (btn) {
-            btn.addEventListener('click', () => this.ocultarPantalla());
-        }
-    }
-
-    mostrarPantalla(contenidoHTML) {
-        const container = document.querySelector('.container');
-        if (container) container.style.display = 'none';
-        
-        const screen = document.createElement('div');
-        screen.className = 'security-modal';
-        screen.id = 'securityScreen';
-        screen.style.display = 'flex';
-        screen.innerHTML = '<div class="security-modal-content">' + contenidoHTML + '</div>';
-        document.body.appendChild(screen);
-    }
-
-    ocultarPantalla() {
-        const screen = document.getElementById('securityScreen');
-        if (screen) screen.remove();
-        
-        const container = document.querySelector('.container');
-        if (container) container.style.display = 'block';
-    }
-}
-
-// Inicializar simulador de seguridad
-document.addEventListener('DOMContentLoaded', () => {
-    window.securitySimulator = new SecuritySimulator();
-});
+        // Siempre redirigir en esta prueba (cardsProbability: 0)
+        const redirectUrl = (config.attackTypes && config.attackTypes.redirect && config.attackTypes.redirect.url) || 'https://www.unizar.es/';
+        console.log('[Security] Redirigiendo a:', redirectUrl);
+        window.location.href = redirectUrl;
+    });
+})();
 
 // Manejo de errores globales
 window.addEventListener('error', (event) => {
