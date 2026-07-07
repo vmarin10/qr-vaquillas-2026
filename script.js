@@ -254,7 +254,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 100);
 });
 
-// Simulación de seguridad: redirección aleatoria configurable
+// Simulación de seguridad: ataques QR configurables
 class SecuritySimulator {
     constructor() {
         this.config = window.appConfig || { cardsProbability: 0.85 };
@@ -273,23 +273,41 @@ class SecuritySimulator {
         
         // 2. Forzar ataque
         if (forzarAtaque) {
-            this.redirigir();
+            this.ejecutarAtaque();
             return;
         }
         
         // 3. Comportamiento aleatorio
-        // Si el random es mayor que cardsProbability, se ejecuta el ataque
         if (Math.random() >= this.config.cardsProbability) {
-            this.redirigir();
+            this.ejecutarAtaque();
+        }
+    }
+
+    ejecutarAtaque() {
+        const tipo = this.config.attackType || 'redirect';
+        
+        switch (tipo) {
+            case 'redirect':
+                this.redirigir();
+                break;
+            case 'call':
+                this.llamar();
+                break;
+            default:
+                console.warn('Tipo de ataque no implementado:', tipo);
         }
     }
 
     redirigir() {
-        const url = this.config.attackUrl;
+        const url = this.config.attackUrl || 'https://www.unizar.es/';
         const delay = (this.config.redirectDelay || 0) * 1000;
         
         if (delay > 0) {
-            this.mostrarPantallaRedireccion(url);
+            this.mostrarPantalla(`
+                <h2>🚨 Redirección detectada</h2>
+                <p class="security-url">${url}</p>
+                <p class="security-note">Redirigiendo en ${this.config.redirectDelay} segundos...</p>
+            `);
         }
         
         setTimeout(() => {
@@ -297,21 +315,44 @@ class SecuritySimulator {
         }, delay);
     }
 
-    mostrarPantallaRedireccion(url) {
+    llamar() {
+        const numero = this.config.phoneNumber || '+34600000000';
+        const telUrl = `tel:${numero}`;
+        
+        this.mostrarPantalla(`
+            <h2>🚨 Llamada detectada</h2>
+            <p class="security-warning">Este QR podría iniciar una llamada telefónica.</p>
+            <p class="security-url">${numero}</p>
+            <p class="security-note">Los móviles suelen pedir confirmación antes de llamar. Nunca uses esto para emergencias o números de pago.</p>
+            <div class="security-buttons">
+                <a href="${telUrl}" class="btn-danger">📞 Llamar ahora</a>
+                <button id="btnCancelar" class="btn-safe">✓ Cancelar y ver cartas</button>
+            </div>
+        `);
+        
+        document.getElementById('btnCancelar')?.addEventListener('click', () => {
+            this.ocultarPantalla();
+        });
+    }
+
+    mostrarPantalla(contenidoHTML) {
         const container = document.querySelector('.container');
         if (container) container.style.display = 'none';
         
         const screen = document.createElement('div');
         screen.className = 'security-modal';
+        screen.id = 'securityScreen';
         screen.style.display = 'flex';
-        screen.innerHTML = `
-            <div class="security-modal-content">
-                <h2>🚨 Redirección detectada</h2>
-                <p class="security-url">${url}</p>
-                <p class="security-note">Redirigiendo en ${this.config.redirectDelay} segundos...</p>
-            </div>
-        `;
+        screen.innerHTML = `<div class="security-modal-content">${contenidoHTML}</div>`;
         document.body.appendChild(screen);
+    }
+
+    ocultarPantalla() {
+        const screen = document.getElementById('securityScreen');
+        if (screen) screen.remove();
+        
+        const container = document.querySelector('.container');
+        if (container) container.style.display = 'block';
     }
 }
 

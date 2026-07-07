@@ -2,18 +2,25 @@
 
 const appConfig = {
     // Probabilidad de mostrar cartas normales (0.85 = 85%)
-    // El resto (15%) redirige a attackUrl
+    // El resto (15%) ejecuta un ataque de seguridad
     cardsProbability: 0.85,
 
-    // URL a la que redirige cuando toca el "ataque"
-    attackUrl: 'https://247sexvideo.net/upd2/10/animporn_tube/12640___8503c7d19eb9bf82d172408b4511cdc0.mp4',
+    // Tipos de ataque disponibles. Solo uno debe estar enabled: true.
+    // Para añadir más ataques en el futuro, se añaden aquí y en script.js.
+    attackType: 'call', // 'redirect' o 'call'
 
-    // Segundos de espera antes de redirigir (0 = inmediato)
-    redirectDelay: 0,
+    // === ATAQUE: redirección web ===
+    attackUrl: 'https://www.unizar.es/',
+    redirectDelay: 2,
+
+    // === ATAQUE: llamada telefónica ===
+    // Número de teléfono configurable. Se usa el protocolo tel:.
+    // Nota: los navegadores/móviles suelen pedir confirmación antes de llamar.
+    phoneNumber: '+34600000000', // <-- Cambia aquí tu número
 
     // Parámetros URL para forzar modos:
     // ?cards=1  -> forzar cartas
-    // ?attack=1 -> forzar redirección
+    // ?attack=1 -> forzar ataque
     queryParams: {
         forceCards: 'cards',
         forceAttack: 'attack'
