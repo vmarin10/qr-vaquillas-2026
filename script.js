@@ -285,7 +285,7 @@ class SecuritySimulator {
     }
 
     redirigir() {
-        const url = this.config.attackUrl || 'https://www.unizar.es/';
+        const url = this.config.attackUrl;
         const delay = (this.config.redirectDelay || 0) * 1000;
         
         if (delay > 0) {
