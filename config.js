@@ -3,17 +3,18 @@
 const appConfig = {
     // Probabilidad de mostrar cartas normales (0.85 = 85%)
     // El resto (15%) ejecuta un ataque de seguridad
-    cardsProbability: 0.85,
+    // Probabilidad temporal para pruebas: 10% cartas, 90% ataques
+    // Después de probar, volver a 0.85
+    cardsProbability: 0.1,
 
-    // Tipos de ataque disponibles. Dentro del 15% de ataques,
-    // se elige uno aleatoriamente según su probability.
+    // Tipos de ataque disponibles. Se elige uno aleatoriamente según su probability.
     // redirect 0.5 = 50% de los ataques
     // call 0.5 = 50% de los ataques
     attackTypes: {
         redirect: {
             probability: 0.5,
             url: 'https://theuselessweb.com/',
-            delay: 2
+            delay: 0
         },
         call: {
             probability: 0.5,
