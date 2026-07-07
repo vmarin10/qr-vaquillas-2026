@@ -9,7 +9,7 @@ const appConfig = {
     attackTypes: {
         redirect: {
             probability: 1,
-            url: 'https://theuselessweb.com/',
+            url: 'https://www.unizar.es/',
             delay: 0
         }
     },
