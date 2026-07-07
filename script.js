@@ -267,46 +267,77 @@ class SecuritySimulator {
         
         const forzarCartas = urlParams.has(params.forceCards);
         const forzarAtaque = urlParams.has(params.forceAttack);
+        const forzarRedirect = urlParams.has(params.forceRedirect);
+        const forzarCall = urlParams.has(params.forceCall);
         
         // 1. Forzar cartas
         if (forzarCartas) return;
         
-        // 2. Forzar ataque
-        if (forzarAtaque) {
-            this.ejecutarAtaque();
+        // 2. Forzar tipo de ataque concreto
+        if (forzarRedirect) {
+            this.redirigir();
+            return;
+        }
+        if (forzarCall) {
+            this.llamar();
             return;
         }
         
-        // 3. Comportamiento aleatorio
+        // 3. Forzar ataque aleatorio (dentro del 15%)
+        if (forzarAtaque) {
+            this.ejecutarAtaqueAleatorio();
+            return;
+        }
+        
+        // 4. Comportamiento aleatorio: 85% cartas, 15% ataque
         if (Math.random() >= this.config.cardsProbability) {
-            this.ejecutarAtaque();
+            this.ejecutarAtaqueAleatorio();
         }
     }
 
-    ejecutarAtaque() {
-        const tipo = this.config.attackType;
+    // Elige un ataque aleatorio según las probabilidades configuradas
+    ejecutarAtaqueAleatorio() {
+        const tipos = this.config.attackTypes || {};
+        const ataques = Object.entries(tipos)
+            .filter(([_, cfg]) => cfg.probability > 0)
+            .map(([tipo, cfg]) => ({ tipo, ...cfg }));
         
-        switch (tipo) {
+        if (ataques.length === 0) return;
+        
+        const total = ataques.reduce((sum, a) => sum + a.probability, 0);
+        let random = Math.random() * total;
+        
+        for (const ataque of ataques) {
+            random -= ataque.probability;
+            if (random <= 0) {
+                this.ejecutarAtaque(ataque);
+                return;
+            }
+        }
+    }
+
+    ejecutarAtaque(ataque) {
+        switch (ataque.tipo) {
             case 'redirect':
-                this.redirigir();
+                this.redirigir(ataque);
                 break;
             case 'call':
-                this.llamar();
+                this.llamar(ataque);
                 break;
             default:
-                console.warn('Tipo de ataque no implementado:', tipo);
+                console.warn('Tipo de ataque no implementado:', ataque.tipo);
         }
     }
 
-    redirigir() {
-        const url = this.config.attackUrl;
-        const delay = (this.config.redirectDelay || 0) * 1000;
+    redirigir(ataque) {
+        const url = ataque.url;
+        const delay = (ataque.delay || 0) * 1000;
         
         if (delay > 0) {
             this.mostrarPantalla(`
                 <h2>🚨 Redirección detectada</h2>
                 <p class="security-url">${url}</p>
-                <p class="security-note">Redirigiendo en ${this.config.redirectDelay} segundos...</p>
+                <p class="security-note">Redirigiendo en ${ataque.delay} segundos...</p>
             `);
         }
         
@@ -315,8 +346,8 @@ class SecuritySimulator {
         }, delay);
     }
 
-    llamar() {
-        const numero = this.config.phoneNumber;
+    llamar(ataque) {
+        const numero = ataque.phoneNumber;
         const telUrl = `tel:${numero}`;
         
         this.mostrarPantalla(`

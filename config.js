@@ -5,24 +5,32 @@ const appConfig = {
     // El resto (15%) ejecuta un ataque de seguridad
     cardsProbability: 0.85,
 
-    // Tipo de ataque activo: 'redirect' o 'call'
-    attackType: 'redirect',
-
-    // === ATAQUE: redirección web ===
-    // URL a la que redirige el ataque. Cámbiala aquí fácilmente.
-    attackUrl: 'https://beastiality.tv/es/tag/goat-sex/',
-    redirectDelay: 2,
-
-    // === ATAQUE: llamada telefónica ===
-    // Número de teléfono configurable. Puede ser tu móvil de pruebas o 112 (solo demostración).
-    phoneNumber: '112',
+    // Tipos de ataque disponibles. Dentro del 15% de ataques,
+    // se elige uno aleatoriamente según su probability.
+    // redirect 0.5 = 50% de los ataques
+    // call 0.5 = 50% de los ataques
+    attackTypes: {
+        redirect: {
+            probability: 0.5,
+            url: 'https://ejemplo.es',
+            delay: 0
+        },
+        call: {
+            probability: 0.5,
+            phoneNumber: '000'
+        }
+    },
 
     // Parámetros URL para forzar modos:
-    // ?cards=1  -> forzar cartas
-    // ?attack=1 -> forzar ataque
+    // ?cards=1     -> forzar cartas
+    // ?attack=1    -> forzar ataque aleatorio
+    // ?redirect=1  -> forzar redirección
+    // ?call=1      -> forzar llamada
     queryParams: {
         forceCards: 'cards',
-        forceAttack: 'attack'
+        forceAttack: 'attack',
+        forceRedirect: 'redirect',
+        forceCall: 'call'
     }
 };
 
