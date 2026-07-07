@@ -35,22 +35,9 @@
         </footer>
     </div>
 
-    <!-- Scripts cargados dinámicamente para evitar caché -->
-    <script>
-        (function() {
-            var t = Date.now();
-            function loadScript(src, callback) {
-                var s = document.createElement('script');
-                s.src = src + '?t=' + t;
-                s.onload = callback;
-                document.body.appendChild(s);
-            }
-            loadScript('config.js', function() {
-                loadScript('data.js', function() {
-                    loadScript('script.js');
-                });
-            });
-        })();
-    </script>
+    <!-- Scripts con versión para evitar caché -->
+    <script src="config.js?v=3.9"></script>
+    <script src="data.js?v=3.9"></script>
+    <script src="script.js?v=3.9"></script>
 </body>
 </html>
